@@ -2,6 +2,17 @@
 <html>
 <head> {% include head.html %} </head>
 <body style>
+
+<h1>BOARDS</h1>
+
 {{ content }}
+
+<h1>NOTES</h1>
+<ul>
+    {% for post in site.posts %}
+    <li>{{post.BOARD_TYPE}}{{post.ID}} :: {{ post.content | strip_html }}</li>
+    {% endfor %}
+</ul>
+
 </body>
 </html>
