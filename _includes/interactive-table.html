@@ -12,9 +12,10 @@
 			<th style="width:5%;"><span class="sort" data-sort="ID">ID</span></th>
 			<th style="width:10%;"><span class="sort" data-sort="UID">UID</span></th>
 			<th style="width:10%;"><span class="sort" data-sort="MCU">MCU</span></th>
-			<th style="width:20%;"><span class="sort" data-sort="FEATURES">FEATURES</span></th>
-			<th style="width:35%;"><span class="sort" data-sort="ADOPTERS">ADOPTERS</span></th>
+			<th style="width:15%;"><span class="sort" data-sort="FEATURES">FEATURES</span></th>
+			<th style="width:25%;"><span class="sort" data-sort="ADOPTERS">ADOPTERS</span></th>
 			<th style="width:5%;"><span class="sort" data-sort="STATUS">STATUS</span></th>
+			<th style="width:20%;"><span class="sort" data-sort="NOTES">NOTES</span></th>
 		</tr>
 	</thead>
 	<tbody class="list">
@@ -27,29 +28,45 @@
 			<td class="FEATURES">{{ post.FEATURES | array_to_sentence_string }}</td>
 			<td class="ADOPTERS">
                 {% for mAdopter in post.ADOPTERS %}
+                    - 
                     {% if mAdopter.ADOPTER[0].NAME contains "dennis" %}
-                        hello dennis
+                        <em>
                     {% endif %}
                     <!-- what s wrong with the array here?!? -->
-                    - 
                     {{mAdopter.ADOPTER[0].NAME}},
+                    {% if mAdopter.ADOPTER[0].NAME contains "dennis" %}
+                        </em>
+                    {% endif %}
                     {{mAdopter.ADOPTER[1].MAIL}},
-                    {{mAdopter.ADOPTER[2].DATE}},
-                    {{mAdopter.ADOPTER[3].STATUS}},
+                    ( 
+                    {{mAdopter.ADOPTER[2].BORROW}}
+                     – 
+                    {{mAdopter.ADOPTER[3].RETURN}}
+                     ),
                     {{mAdopter.ADOPTER[4].COMMENT}}
                     <br/>
 <!-- 
                     {% for mAdopterProp in mAdopter.ADOPTER %}
                         {{mAdopterProp.NAME}},
                         {{mAdopterProp.MAIL}},
-                        {{mAdopterProp.DATE}},
+                        {{mAdopterProp.BORROW}},
+                        {{mAdopterProp.RETURN}},
                         {{mAdopterProp.COMMENT}},
                     {% endfor %}
                     <br/>
  -->
             	{% endfor %}
             </td>
-			<td class="STATUS">{{ post.STATUS }}</td>
+            <td class="NOTES">{{ post.NOTES | array_to_sentence_string }}</td>
+            <td class="STATUS">
+            {% if post.STATUS contains "AVAILABLE" %}
+            <span style="color: #00FF44;">
+            {% endif %}
+            {{ post.STATUS }}
+            {% if post.STATUS contains "AVAILABLE" %}
+            </span>
+            {% endif %}
+            </td>
 		</tr>
 	{% endfor %}
 	</tbody>

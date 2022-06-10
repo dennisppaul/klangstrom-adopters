@@ -10,7 +10,10 @@
 <h1>NOTES</h1>
 <ul>
     {% for post in site.posts %}
-    <li>{{post.BOARD_TYPE}}{{post.ID}} :: {{ post.content | strip_html }}</li>
+        {% assign content = post.content | strip_newlines %}
+        {% if content != '' %}
+            <li>{{post.BOARD_TYPE}}{{post.ID}} :: {{ post.content | strip_html }}</li>
+        {% endif %}
     {% endfor %}
 </ul>
 
