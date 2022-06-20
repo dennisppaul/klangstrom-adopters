@@ -57,7 +57,6 @@
  -->
             	{% endfor %}
             </td>
-            <td class="NOTES">{{ post.NOTES | array_to_sentence_string }}</td>
             <td class="STATUS">
             {% if post.STATUS contains "AVAILABLE" %}
             <span style="color: #00FF44;">
@@ -66,6 +65,7 @@
             {% if post.STATUS contains "AVAILABLE" %}
             </span>
             {% endif %}
+            <td class="NOTES">{{ post.NOTES }}</td> <!--  | array_to_sentence_string  -->
             </td>
 		</tr>
 	{% endfor %}
